@@ -1,7 +1,9 @@
 "use client";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ProjectCard } from "@/components/ui/project-card";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 import {
   Github,
   Linkedin,
@@ -67,6 +69,7 @@ function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
 }
 
 // ============================= Site Data =============================
+
 const DATA = {
   name: "Anirudh Narang",
   role: "AI/ML Engineer | Delivering Scalable Solutions in Computer Vision, NLP & Time-Series",
@@ -83,32 +86,32 @@ const DATA = {
   skills: {
     "Programming Languages": ["Python", "Java", "R", "SQL"],
     "Machine Learning & AI": [
-        "Deep Learning",
-        "Computer Vision",
-        "Natural Language Processing (NLP)",
-        "Predictive Modeling",
-        "Supervised Learning",
-        "Unsupervised Learning",
-        "Transformers"
+      "Deep Learning",
+      "Computer Vision",
+      "Natural Language Processing (NLP)",
+      "Predictive Modeling",
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Transformers"
     ],
     "Frameworks & Libraries": [
-        "TensorFlow",
-        "PyTorch",
-        "Keras",
-        "Scikit-learn",
-        "OpenCV",
-        "Pandas",
-        "NumPy"
+      "TensorFlow",
+      "PyTorch",
+      "Keras",
+      "Scikit-learn",
+      "OpenCV",
+      "Pandas",
+      "NumPy"
     ],
     "Data Visualization": ["Tableau", "Excel", "Matplotlib", "Seaborn"],
     "Tools & Platforms": ["MySQL", "FastAPI", "JIRA", "GitHub", "Docker"]
-   },
+  },
   projects: [
     {
       title: "Emotion Detection System",
       blurb:
         "Built a real-time facial emotion recognition pipeline using YOLOv8 and CNNs; optimized for live video inference in HCI and analytics use cases.",
-      stack: ["YOLOv8", "PyTorch", "OpenCV", "FastAPI"],      
+      stack: ["YOLOv8", "PyTorch", "OpenCV", "FastAPI"],
       video: "/videos/EDS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Emotion_detection-using-YOLOv8" }],
     },
@@ -145,9 +148,9 @@ const DATA = {
       school: "Bhagwan Parshuram Institute of Technology, New Delhi",
       degree: "B.Tech in ECE",
       period: "2019 — 2023",
-      percentage : "Percentage: 91.8%",
+      percentage: "Percentage: 91.8%",
     },
-    { school: "Hansraj Model School, New Delhi", degree: "Class XII", period: "2018 — 2019" , percentage : "Percentage: 89%", },
+    { school: "Hansraj Model School, New Delhi", degree: "Class XII", period: "2018 — 2019", percentage: "Percentage: 89%", },
   ],
 };
 
@@ -199,20 +202,39 @@ const Nav: React.FC = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 backdrop-blur bg-gradient-to-r from-slate-50/80 to-slate-100/80 dark:from-slate-900/80 dark:to-slate-950/80 border-b border-slate-200 dark:border-slate-800"
+      className="sticky top-0 z-50 backdrop-blur bg-gradient-to-r from-slate-50/80 to-slate-100/80 
+                 dark:from-slate-900/80 dark:to-slate-950/80 border-b border-slate-200 dark:border-slate-800"
     >
       <Container>
         <div className="flex items-center justify-between py-4">
+          {/* Logo + Animated Title */}
           <a href="#top" className="flex items-center gap-2">
             <Code2 className="h-6 w-6 text-cyan-500" />
-            <span className="font-italic text-lg">Anirudh Narang — AI/ML Engineer</span>
+            <span className="font-bold text-lg flex items-center gap-2">
+              Anirudh Narang —{" "}
+              <TypeAnimation
+                sequence={[
+                  "AI/ML Engineer 🚀", 2000,
+                  "Computer Vision Specialist 👁️", 2000,
+                  "Data Scientist📊", 2000,
+                  "Building Scalable AI ⚡", 2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                className="text-cyan-600 dark:text-cyan-400"
+              />
+            </span>
           </a>
+
+          {/* Nav Links */}
           <div className="hidden md:flex items-center gap-6">
             {links.map((id) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="text-sm text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition"
+                className="text-sm text-slate-600 dark:text-slate-300 hover:text-cyan-500 
+                           dark:hover:text-cyan-400 transition"
               >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
@@ -255,7 +277,22 @@ const Hero: React.FC = () => (
           <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             {DATA.name}
           </h1>
-          <p className="text-xl mt-4 text-slate-200">{DATA.role}</p>
+          <TypeAnimation
+            sequence={[
+              "AI/ML Engineer 🚀",
+              2000,
+              "Computer Vision Specialist 👁️",
+              2000,
+              "Data Scientist📊",
+              2000,
+              "Building Scalable AI ⚡",
+              2000,
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+            className="block text-xl mt-4 text-slate-200"
+          />
           <p className="mt-6 text-slate-300 max-w-xl">{DATA.summary}</p>
           <div className="flex flex-wrap items-center gap-4 mt-6">
             <Badge className="flex items-center gap-1 bg-slate-800 text-slate-200">
@@ -282,41 +319,41 @@ const Hero: React.FC = () => (
           </motion.div>
         </motion.div>
         <motion.div
-  initial={{ opacity: 0, x: 50 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  viewport={{ once: true, amount: 0.3 }}
-  transition={{ duration: 0.7 }}
-  className="hidden md:flex justify-center relative"
->
-    {/* Glowing Halo */}
-  <div className="absolute inset-0 flex justify-center items-center">
-    <div className="w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 blur-3xl opacity-30 animate-pulse"></div>
-  </div>
-  {/* Headshot */}
-  <img
-    src="/GIF.gif"   // 
-    alt="Anirudh Narang"
-    className="rounded-2xl shadow-lg border border-slate-700/40 w-140 h-100 object-cover"
-  />
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="hidden md:flex justify-center relative"
+        >
+          {/* Glowing Halo */}
+          <div className="absolute inset-0 flex justify-center items-center">
+            <div className="w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 blur-3xl opacity-30 animate-pulse"></div>
+          </div>
+          {/* Headshot */}
+          <img
+            src="/GIF.gif"   // 
+            alt="Anirudh Narang"
+            className="rounded-2xl shadow-lg border border-slate-700/40 w-140 h-100 object-cover"
+          />
 
-  {/* Floating Icon 1 */}
-  <motion.div
-    animate={{ y: [0, -10, 0] }}
-    transition={{ repeat: Infinity, duration: 3 }}
-    className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
-  >
-    <Code2 className="h-8 w-8 text-cyan-500" />
-  </motion.div>
+          {/* Floating Icon 1 */}
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 3 }}
+            className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
+          >
+            <Code2 className="h-8 w-8 text-cyan-500" />
+          </motion.div>
 
-  {/* Floating Icon 2 */}
-  <motion.div
-    animate={{ x: [0, 10, 0] }}
-    transition={{ repeat: Infinity, duration: 4 }}
-    className="absolute bottom-6 -left-6 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
-  >
-    <Brain className="h-8 w-8 text-blue-500" />
-  </motion.div>
-</motion.div>
+          {/* Floating Icon 2 */}
+          <motion.div
+            animate={{ x: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 4 }}
+            className="absolute bottom-6 -left-6 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
+          >
+            <Brain className="h-8 w-8 text-blue-500" />
+          </motion.div>
+        </motion.div>
 
       </div>
     </Container>
@@ -333,10 +370,20 @@ const Skills: React.FC = () => (
             <div className="font-semibold mb-2">{category}</div>
             <div className="flex flex-wrap gap-2">
               {(skills as string[]).map((s) => (
-                <Badge key={s} className="bg-slate-200 dark:bg-slate-800 dark:text-slate-200">
-                  {s}
-                </Badge>
+                <motion.div
+                  key={s}
+                  whileHover={{ scale: 1.15, rotate: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 250 }}
+                >
+                  <Badge className="bg-slate-200 dark:bg-slate-800 dark:text-slate-200 
+                      hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 
+                      hover:text-white shadow-md cursor-pointer transition-all">
+                    {s}
+                  </Badge>
+                </motion.div>
               ))}
+
             </div>
           </div>
         ))}
@@ -351,43 +398,47 @@ const Projects: React.FC = () => (
       <SectionTitle icon={<Database className="h-6 w-6 text-cyan-500" />}>
         Projects
       </SectionTitle>
-      <div className="grid md:grid-cols-3 gap-8 items-stretch">
+
+      {/* Auto rows + stretch makes all cards same height */}
+      <div className="grid md:grid-cols-3 gap-8 items-stretch auto-rows-fr">
         {DATA.projects.map((p, idx) => (
           <motion.div
             key={p.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: idx * 0.05 }}
+            transition={{ duration: 0.5, delay: idx * 0.05, type: "spring", stiffness: 200 }}
+            whileHover={{ scale: 1.03, rotateZ: 1 }}
+            whileTap={{ scale: 0.98 }}
             className="h-full"
           >
-            <Card
-              className="relative h-full flex flex-col bg-gradient-to-br from-slate-100 to-slate-50 
-              dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 
-              shadow-xl hover:shadow-2xl transition"
+            <ProjectCard className="flex flex-col justify-between h-[400px] w-full transition-shadow duration-300 hover:shadow-2xl hover:shadow-cyan-500/20"
             >
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">{p.title}</CardTitle>
+              {/* Header */}
+              <CardHeader className="pb-0">
+                <CardTitle className="text-lg font-bold mb-2">{p.title}</CardTitle>
               </CardHeader>
 
-              <CardContent className="flex flex-col flex-grow">
-                <p className="text-sm mb-4 text-slate-600 dark:text-slate-300">
+              {/* Content */}
+              <CardContent className="flex flex-col flex-1 pt-0">
+                <p className="text-sm mb-6 text-slate-600 dark:text-slate-300 leading-relaxed">
                   {p.blurb}
                 </p>
 
+                {/* Tech stack tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {p.stack.map((s: string) => (
                     <Badge
                       key={s}
-                      className="bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200"
+                      className="bg-slate-200 dark:bg-slate-800 dark:text-slate-200 hover:scale-110 hover:bg-cyan-500 hover:text-white transition-all cursor-pointer"
                     >
                       {s}
                     </Badge>
                   ))}
                 </div>
 
-                {/* 🔹 Video preview with GitHub button inside */}
-                <div className="aspect-video mb-4 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative">
+                {/* Video preview with GitHub button pinned */}
+                <div className="mt-auto aspect-video rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative">
                   <video
                     src={p.video}
                     autoPlay
@@ -396,28 +447,28 @@ const Projects: React.FC = () => (
                     playsInline
                     className="w-full h-full object-cover rounded-xl"
                   />
-
-                  {/* Floating GitHub button on video */}
                   {p.links?.map((l: { label: string; href: string }) => (
                     <a
                       key={l.label}
                       href={l.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="absolute bottom-3 right-3 p-2 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white shadow-md opacity-80 hover:opacity-100 transition"
+                      className="absolute bottom-3 right-3 p-2 rounded-full bg-cyan-600 hover:bg-cyan-700 
+                                 text-white shadow-md opacity-80 hover:opacity-100 transition"
                     >
                       <Github className="h-4 w-4" />
                     </a>
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </ProjectCard>
           </motion.div>
         ))}
       </div>
     </section>
   </Container>
 );
+
 
 
 const Experience: React.FC = () => (
