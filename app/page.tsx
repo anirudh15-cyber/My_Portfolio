@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion.div } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -17,6 +17,7 @@ import {
   Moon,
   Code2,
 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 // =============== Small local UI + utils (no external imports) ===============
 const cn = (...classes: Array<string | false | null | undefined>) =>
@@ -81,10 +82,9 @@ function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
 // ============================= Site Data =============================
 const DATA = {
   name: "Anirudh Narang",
-  role: "AI/ML Engineer | Data Science & Computer Vision",
-  summary:
-    "AI/ML Engineer delivering end‑to‑end products across computer vision, NLP and time‑series. Comfortable with PyTorch/TensorFlow, FastAPI, OpenCV, and scalable data pipelines.",
-  location: "Delhi, India (Open to Remote)",
+  role: "AI/ML Engineer | Delivering Scalable Solutions in Computer Vision, NLP & Time-Series",
+  summary: "I’m an AI/ML Engineer passionate about building end-to-end machine learning products — from research to deployment. My work spans computer vision, NLP, and time-series modeling, with a focus on real-time systems and scalable data pipelines. Skilled in PyTorch, TensorFlow, FastAPI, and OpenCV, I thrive at turning ideas into production-ready AI applications that make a measurable impact.",
+  location: "Delhi, India",
   email: "anirudhnarang16@gmail.com",
   phone: "+91-9818924498",
   resumeUrl: "/Anirudh_Narang AI.pdf",
@@ -118,33 +118,26 @@ const DATA = {
    },
   projects: [
     {
-      title: "Emotion Detection using YOLOv8",
+      title: "Emotion Detection System",
       blurb:
-        "Real-time facial emotion recognition (~30 FPS) with YOLOv8 + CNN; robust preprocessing, tracked IDs, and FastAPI service.",
-      stack: ["YOLOv8", "PyTorch", "OpenCV", "FastAPI"],
-      image:
-        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop",
-      video: "https://www.youtube.com/embed/iHjibNut5w8?rel=0",
-      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber" }],
+        "Built a real-time facial emotion recognition pipeline using YOLOv8 and CNNs; optimized for live video inference in HCI and analytics use cases.",
+      stack: ["YOLOv8", "PyTorch", "OpenCV", "FastAPI"],      
+      video: "/videos/EDS.mp4",
+      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Emotion_detection-using-YOLOv8" }],
     },
     {
       title: "Custom Hand Gesture Recognition",
       blurb:
-        "MediaPipe landmarks → LSTM classifier (95% acc) for real‑time gesture control. Latency‑optimized pipeline.",
-      stack: ["TensorFlow", "LSTM", "MediaPipe"],
-      image:
-        "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?q=80&w=1200&auto=format&fit=crop",
-      video: "https://www.youtube.com/embed/0G13v7S6w7U?rel=0",
-      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber" }],
+        "Developed an LSTM-based gesture classifier (95% accuracy) on MediaPipe landmarks for low-latency system control.",
+      stack: ["TensorFlow", "LSTM", "MediaPipe", "Pose Estimation"],
+      video: "/videos/HGRS.mp4",
+      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Custom-Hand-Gesture-Recognition-System" }],
     },
     {
-      title: "Real‑Time Price Prediction",
-      blurb:
-        "Streaming pipeline for equities/crypto with engineered features (RSI, MA, volatility) and XGBoost + LSTM; R² ≈ 0.89.",
-      stack: ["XGBoost", "LSTM", "Python", "Pandas"],
-      image:
-        "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200&auto=format&fit=crop",
-      video: "https://www.youtube.com/embed/yKzRZ4L7dO8?rel=0",
+      title: "Social Distancing Violation Detection System",
+      blurb: "Implemented a YOLO-based monitoring system to flag distancing violations in public spaces; enabled smarter crowd management.",
+      stack: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning"],
+      video: "/videos/SDS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber" }],
     },
   ],
@@ -154,9 +147,9 @@ const DATA = {
       role: "Associate Software Engineer",
       period: "09/2023 — Present",
       points: [
-        "Deployed ML models on large financial datasets; +15% accuracy, -20% processing time.",
-        "Improved predictive modeling using deep learning; +10% decision quality.",
-        "Integrated AI insights into business dashboards across teams.",
+        "Designed and deployed ML models on large-scale financial datasets, improving accuracy by 15% while reducing processing time by 20%.",
+        "Enhanced predictive analytics pipelines with deep learning architectures, leading to a 10% improvement in decision-making quality.",
+        "Collaborated across business teams to integrate AI insights into dashboards, driving adoption of data-driven decision making.",
       ],
     },
   ],
@@ -165,8 +158,9 @@ const DATA = {
       school: "Bhagwan Parshuram Institute of Technology, New Delhi",
       degree: "B.Tech in ECE",
       period: "2019 — 2023",
+      percentage : "Percentage: 91.8%",
     },
-    { school: "Hansraj Model School, New Delhi", degree: "Class XII", period: "2018 — 2019" },
+    { school: "Hansraj Model School, New Delhi", degree: "Class XII", period: "2018 — 2019" , percentage : "Percentage: 89%", },
   ],
 };
 
@@ -224,7 +218,7 @@ const Nav: React.FC = () => {
         <div className="flex items-center justify-between py-4">
           <a href="#top" className="flex items-center gap-2">
             <Code2 className="h-6 w-6 text-cyan-500" />
-            <span className="font-bold text-lg">Anirudh</span>
+            <span className="font-italic text-lg">Anirudh Narang — AI/ML Engineer</span>
           </a>
           <div className="hidden md:flex items-center gap-6">
             {links.map((id) => (
@@ -301,18 +295,42 @@ const Hero: React.FC = () => (
           </motion.div>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-          className="hidden md:flex justify-center"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200"
-            alt="AI Visualization"
-            className="rounded-2xl shadow-lg border border-slate-700/40"
-          />
-        </motion.div>
+  initial={{ opacity: 0, x: 50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.7 }}
+  className="hidden md:flex justify-center relative"
+>
+    {/* Glowing Halo */}
+  <div className="absolute inset-0 flex justify-center items-center">
+    <div className="w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 blur-3xl opacity-30 animate-pulse"></div>
+  </div>
+  {/* Headshot */}
+  <img
+    src="/GIF.gif"   // 
+    alt="Anirudh Narang"
+    className="rounded-2xl shadow-lg border border-slate-700/40 w-140 h-100 object-cover"
+  />
+
+  {/* Floating Icon 1 */}
+  <motion.div
+    animate={{ y: [0, -10, 0] }}
+    transition={{ repeat: Infinity, duration: 3 }}
+    className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
+  >
+    <Code2 className="h-8 w-8 text-cyan-500" />
+  </motion.div>
+
+  {/* Floating Icon 2 */}
+  <motion.div
+    animate={{ x: [0, 10, 0] }}
+    transition={{ repeat: Infinity, duration: 4 }}
+    className="absolute bottom-6 -left-6 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
+  >
+    <Brain className="h-8 w-8 text-blue-500" />
+  </motion.div>
+</motion.div>
+
       </div>
     </Container>
   </div>
@@ -343,8 +361,10 @@ const Skills: React.FC = () => (
 const Projects: React.FC = () => (
   <Container>
     <section id="projects" className="py-20">
-      <SectionTitle icon={<Database className="h-6 w-6 text-cyan-500" />}>Projects</SectionTitle>
-      <div className="grid md:grid-cols-3 gap-8">
+      <SectionTitle icon={<Database className="h-6 w-6 text-cyan-500" />}>
+        Projects
+      </SectionTitle>
+      <div className="grid md:grid-cols-3 gap-8 items-stretch">
         {DATA.projects.map((p, idx) => (
           <motion.div
             key={p.title}
@@ -352,39 +372,55 @@ const Projects: React.FC = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: idx * 0.05 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl hover:shadow-2xl transition">
-              <img src={p.image} alt={p.title} className="w-full h-44 object-cover rounded-2xl" />
+            <Card
+              className="relative h-full flex flex-col bg-gradient-to-br from-slate-100 to-slate-50 
+              dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 
+              shadow-xl hover:shadow-2xl transition"
+            >
               <CardHeader>
                 <CardTitle className="text-lg font-bold">{p.title}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-sm mb-4 text-slate-600 dark:text-slate-300">{p.blurb}</p>
+
+              <CardContent className="flex flex-col flex-grow">
+                <p className="text-sm mb-4 text-slate-600 dark:text-slate-300">
+                  {p.blurb}
+                </p>
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {p.stack.map((s: string) => (
-                    <Badge key={s} className="bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200">
+                    <Badge
+                      key={s}
+                      className="bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200"
+                    >
                       {s}
                     </Badge>
                   ))}
                 </div>
-                <div className="aspect-video mb-4 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700">
-                  <iframe
-                    className="w-full h-full"
+
+                {/* 🔹 Video preview with GitHub button inside */}
+                <div className="aspect-video mb-4 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative">
+                  <video
                     src={p.video}
-                    title={p.title}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover rounded-xl"
                   />
-                </div>
-                <div className="flex gap-2">
+
+                  {/* Floating GitHub button on video */}
                   {p.links?.map((l: { label: string; href: string }) => (
-                    <Button key={l.label} className="rounded-full">
-                      <a href={l.href} target="_blank" rel="noreferrer" className="flex items-center">
-                        <ExternalLink className="h-3.5 w-3.5 mr-1" />
-                        {l.label}
-                      </a>
-                    </Button>
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="absolute bottom-3 right-3 p-2 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white shadow-md opacity-80 hover:opacity-100 transition"
+                    >
+                      <Github className="h-4 w-4" />
+                    </a>
                   ))}
                 </div>
               </CardContent>
@@ -395,6 +431,7 @@ const Projects: React.FC = () => (
     </section>
   </Container>
 );
+
 
 const Experience: React.FC = () => (
   <Container>
@@ -449,6 +486,7 @@ const Education: React.FC = () => (
                 <CardTitle>{ed.degree}</CardTitle>
                 <p className="text-sm text-slate-600 dark:text-slate-400">{ed.school}</p>
                 <p className="text-sm text-slate-600 dark:text-slate-400">{ed.period}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{ed.percentage}</p>
               </CardHeader>
             </Card>
           </motion.div>
@@ -458,28 +496,60 @@ const Education: React.FC = () => (
   </Container>
 );
 
-const Contact: React.FC = () => (
-  <Container>
-    <section id="contact" className="py-20">
-      <SectionTitle>Contact</SectionTitle>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Card className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-8">
-          <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
-            <Input type="text" placeholder="Your Name" required />
-            <Input type="email" placeholder="Your Email" required />
-            <Textarea placeholder="Your Message" rows={4} required />
-            <Button className="rounded-full">Send</Button>
-          </form>
-        </Card>
-      </motion.div>
-    </section>
-  </Container>
-);
+const Contact: React.FC = () => {
+  const formRef = React.useRef<HTMLFormElement | null>(null);
+
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formRef.current) {
+      emailjs
+        .sendForm(
+          "service_txw7ekh",   // 🔹 Replace with EmailJS Service ID
+          "template_8b98t6c",  // 🔹 Replace with EmailJS Template ID
+          formRef.current,
+          "0_HjT6FhTjW0TiNjV"    // 🔹 Replace with EmailJS Public Key
+        )
+        .then(
+          () => {
+            alert("✅ Message sent successfully!");
+            formRef.current?.reset();
+          },
+          (error) => {
+            console.error(error.text);
+            alert("❌ Failed to send message. Please try again.");
+          }
+        );
+    }
+  };
+
+  return (
+    <Container>
+      <section id="contact" className="py-20">
+        <SectionTitle>Contact</SectionTitle>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-8">
+            <form ref={formRef} onSubmit={sendEmail} className="grid gap-4">
+              <Input type="text" name="from_name" placeholder="Your Name" required />
+              <Input type="email" name="reply_to" placeholder="Your Email" required />
+              <Textarea name="message" placeholder="Your Message" rows={4} required />
+              <Button type="submit" className="rounded-full">
+                Send
+              </Button>
+            </form>
+          </Card>
+        </motion.div>
+      </section>
+    </Container>
+  );
+};
+
+
 
 // ============================= Page =============================
 export default function Page() {

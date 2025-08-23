@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Anirudh Narang — Portfolio",
-  description: "AI/ML Engineer portfolio of Anirudh Narang",
+  description: "Welcome to my Portfolio",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
