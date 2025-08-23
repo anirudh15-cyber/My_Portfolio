@@ -1,5 +1,5 @@
 "use client";
-
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -37,19 +37,6 @@ const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HT
   )
 );
 Button.displayName = "Button";
-
-function Card({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("rounded-2xl p-4", className)}>{children}</div>;
-}
-function CardHeader({ children }: { children: React.ReactNode }) {
-  return <div className="mb-2">{children}</div>;
-}
-function CardTitle({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <h3 className={cn("font-semibold text-xl", className)}>{children}</h3>;
-}
-function CardContent({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
-}
 
 function Badge({ children, className }: { children: React.ReactNode; className?: string }) {
   return <span className={cn("px-2 py-1 rounded-md text-xs font-medium", className)}>{children}</span>;
@@ -190,7 +177,7 @@ const Container: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const SectionTitle: React.FC<{ icon?: React.ReactNode; children: React.ReactNode }> = ({ icon, children }) => (
-  <motion.div
+  <motion.section
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -201,7 +188,7 @@ const SectionTitle: React.FC<{ icon?: React.ReactNode; children: React.ReactNode
     <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
       {children}
     </h2>
-  </motion.div>
+  </motion.section>
 );
 
 // ============================= Sections =============================
