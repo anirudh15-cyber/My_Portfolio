@@ -138,7 +138,7 @@ const DATA = {
       blurb: "Implemented a YOLO-based monitoring system to flag distancing violations in public spaces; enabled smarter crowd management.",
       stack: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning"],
       video: "/videos/SDS.mp4",
-      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber" }],
+      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Social-Distancing-Violation-Detection-System" }],
     },
   ],
   experience: [
