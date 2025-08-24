@@ -9,6 +9,8 @@ import { TypeAnimation } from "react-type-animation";
 import {
   Github,
   Linkedin,
+  Menu,
+  X,
   Mail,
   ExternalLink,
   Download,
@@ -199,6 +201,7 @@ const SectionTitle: React.FC<{ icon?: React.ReactNode; children: React.ReactNode
 // ============================= Sections =============================
 const Nav: React.FC = () => {
   const links = ["about", "skills", "projects", "experience", "education", "contact"];
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <motion.div
@@ -212,8 +215,8 @@ const Nav: React.FC = () => {
       <Container>
         <div className="flex items-center justify-between py-4">
           {/* Logo + Animated Title */}
-          <a href="#top" className="flex items-center gap-1">
-            <Logo size={40}/> {/* ✅ small, clean logo here */}
+          <a href="#top" className="flex items-center gap-2">
+            <Logo size={40} /> {/* ✅ small, clean logo here */}
             <span className="font-bold text-lg flex items-center gap-2">
               Anirudh Narang —
               <TypeAnimation
@@ -231,7 +234,7 @@ const Nav: React.FC = () => {
             </span>
           </a>
 
-          {/* Nav Links */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
             {links.map((id) => (
               <a
@@ -239,7 +242,7 @@ const Nav: React.FC = () => {
                 href={`#${id}`}
                 className="text-base font-medium text-slate-600 dark:text-slate-300 
                            hover:text-cyan-500 dark:hover:text-cyan-400 transition"
-              >     
+              >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
@@ -252,7 +255,40 @@ const Nav: React.FC = () => {
               </Button>
             )}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-cyan-500"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown */}
+        {menuOpen && (
+          <div className="md:hidden flex flex-col items-center gap-4 pb-4">
+            {links.map((id) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setMenuOpen(false)}
+                className="text-base font-medium text-slate-600 dark:text-slate-300 
+                           hover:text-cyan-500 dark:hover:text-cyan-400 transition"
+              >
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </a>
+            ))}
+            <ThemeToggle />
+            {DATA.resumeUrl && (
+              <Button className="rounded-full">
+                <a href={DATA.resumeUrl} className="flex items-center">
+                  <Download className="h-4 w-4 mr-2" /> Resume
+                </a>
+              </Button>
+            )}
+          </div>
+        )}
       </Container>
     </motion.div>
   );
