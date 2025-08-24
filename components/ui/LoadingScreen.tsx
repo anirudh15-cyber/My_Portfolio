@@ -16,7 +16,7 @@ const LoadingScreen: React.FC = () => {
       {loading && (
         <motion.div
           key="loader"
-          className="fixed inset-0 flex items-center justify-center 
+          className="fixed inset-0 flex flex-col items-center justify-center
                      bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 
                      text-white z-[9999]"
           initial={{ opacity: 1 }}
@@ -27,11 +27,13 @@ const LoadingScreen: React.FC = () => {
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 220 110"
-            className="w-2/3 max-w-xs h-auto"
+            className="w-40 h-auto md:w-56 lg:w-64"
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             {/* A Shape */}
             <motion.path
-              d="M70 100 L110 30 L150 100 Z" // Triangle (A)
+              d="M70 100 L110 30 L150 100 Z"
               stroke="url(#grad1)"
               strokeWidth="8"
               fill="transparent"
@@ -68,7 +70,7 @@ const LoadingScreen: React.FC = () => {
 
           {/* Subtext */}
           <motion.p
-            className="absolute bottom-20 text-slate-400 tracking-widest text-sm"
+            className="absolute bottom-20 text-slate-400 tracking-[0.3em] text-sm uppercase"
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 1, 0] }}
             transition={{ repeat: Infinity, duration: 3 }}
