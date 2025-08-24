@@ -1,6 +1,8 @@
 "use client";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ProjectCard } from "@/components/ui/project-card";
+import Logo from "@/components/ui/Logo";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -197,26 +199,28 @@ const SectionTitle: React.FC<{ icon?: React.ReactNode; children: React.ReactNode
 // ============================= Sections =============================
 const Nav: React.FC = () => {
   const links = ["about", "skills", "projects", "experience", "education", "contact"];
+
   return (
     <motion.div
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 backdrop-blur bg-gradient-to-r from-slate-50/80 to-slate-100/80 
-                 dark:from-slate-900/80 dark:to-slate-950/80 border-b border-slate-200 dark:border-slate-800"
+      className="sticky top-0 z-50 backdrop-blur bg-gradient-to-r 
+                 from-slate-50/80 to-slate-100/80 dark:from-slate-900/80 
+                 dark:to-slate-950/80 border-b border-slate-200 dark:border-slate-800"
     >
       <Container>
         <div className="flex items-center justify-between py-4">
           {/* Logo + Animated Title */}
-          <a href="#top" className="flex items-center gap-2">
-            <Code2 className="h-6 w-6 text-cyan-500" />
+          <a href="#top" className="flex items-center gap-1">
+            <Logo size={40} glow={false} /> {/* ✅ small, clean logo here */}
             <span className="font-bold text-lg flex items-center gap-2">
-              Anirudh Narang —{" "}
+              Anirudh Narang —
               <TypeAnimation
                 sequence={[
                   "AI/ML Engineer 🚀", 2000,
-                  "Computer Vision Specialist 👁️", 2000,
-                  "Data Scientist📊", 2000,
+                  "Computer Vision 👁️", 2000,
+                  "NLP & Time-Series 📊", 2000,
                   "Building Scalable AI ⚡", 2000,
                 ]}
                 wrapper="span"
@@ -233,9 +237,9 @@ const Nav: React.FC = () => {
               <a
                 key={id}
                 href={`#${id}`}
-                className="text-sm text-slate-600 dark:text-slate-300 hover:text-cyan-500 
-                           dark:hover:text-cyan-400 transition"
-              >
+                className="text-base font-medium text-slate-600 dark:text-slate-300 
+                           hover:text-cyan-500 dark:hover:text-cyan-400 transition"
+              >     
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
@@ -253,6 +257,7 @@ const Nav: React.FC = () => {
     </motion.div>
   );
 };
+
 
 const Hero: React.FC = () => (
   <div id="about" className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-900 text-white overflow-hidden">
@@ -323,7 +328,7 @@ const Hero: React.FC = () => (
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
-          className="hidden md:flex justify-center relative"
+          className="flex justify-center relative mt-10 md:mt-0"
         >
           {/* Glowing Halo */}
           <div className="absolute inset-0 flex justify-center items-center">
@@ -331,15 +336,18 @@ const Hero: React.FC = () => (
           </div>
           {/* Headshot */}
           <img
-            src="/GIF.gif"   // 
+            src="/GIF.gif"
             alt="Anirudh Narang"
-            className="rounded-2xl shadow-lg border border-slate-700/40 w-140 h-100 object-cover"
+            className="rounded-2xl shadow-lg border border-slate-700/40 
+             w-full max-w-sm md:max-w-md lg:max-w-lg 
+             object-cover"
           />
+
 
           {/* Floating Icon 1 */}
           <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 3 }}
+            animate={{ y: [0, -10, 0], scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
             className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
           >
             <Code2 className="h-8 w-8 text-cyan-500" />
@@ -347,12 +355,13 @@ const Hero: React.FC = () => (
 
           {/* Floating Icon 2 */}
           <motion.div
-            animate={{ x: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 4 }}
+            animate={{ x: [0, 10, 0], scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             className="absolute bottom-6 -left-6 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
           >
             <Brain className="h-8 w-8 text-blue-500" />
           </motion.div>
+
         </motion.div>
 
       </div>
@@ -374,11 +383,11 @@ const Skills: React.FC = () => (
                   key={s}
                   whileHover={{ scale: 1.15, rotate: 2 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 250 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
                   <Badge className="bg-slate-200 dark:bg-slate-800 dark:text-slate-200 
                       hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 
-                      hover:text-white shadow-md cursor-pointer transition-all">
+                      hover:text-white shadow-md cursor-pointer transition-all cursor-pointer">
                     {s}
                   </Badge>
                 </motion.div>
@@ -474,8 +483,21 @@ const Projects: React.FC = () => (
 const Experience: React.FC = () => (
   <Container>
     <section id="experience" className="py-20">
-      <SectionTitle icon={<LineChart className="h-6 w-6 text-cyan-500" />}>Experience</SectionTitle>
-      <div className="grid gap-8">
+      <SectionTitle icon={<LineChart className="h-6 w-6 text-cyan-500" />}>
+        Experience
+      </SectionTitle>
+
+      <div className="relative ml-6">
+        {/* Animated glowing vertical line */}
+        <motion.div
+          initial={{ height: 0 }}
+          whileInView={{ height: "100%" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute left-[-1px] top-0 w-[3px] 
+                     bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-500
+                     rounded-full animate-pulse"
+        />
+
         {DATA.experience.map((e) => (
           <motion.div
             key={e.company}
@@ -483,18 +505,43 @@ const Experience: React.FC = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
+            className="relative mb-12 pl-6"
           >
-            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl">
+            {/* Glowing timeline dot */}
+            <motion.div
+              animate={{
+                scale: [1, 1.3, 1], boxShadow: [
+                  "0 0 0px #22d3ee",
+                  "0 0 20px #22d3ee",
+                  "0 0 0px #22d3ee"
+                ]
+              }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="absolute -left-[25px] top-6 w-5 h-5 rounded-full bg-cyan-500"
+            />
+
+            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 
+                             dark:from-slate-800 dark:to-slate-900 
+                             border border-slate-200 dark:border-slate-700 shadow-xl">
               <CardHeader>
                 <CardTitle className="text-lg font-bold">
                   {e.role} — {e.company}
                 </CardTitle>
-                <p className="text-sm text-slate-500 dark:text-slate-400">{e.period}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  {e.period}
+                </p>
               </CardHeader>
               <CardContent>
                 <ul className="list-disc pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-300">
                   {e.points.map((pt: string, idx: number) => (
-                    <li key={idx}>{pt}</li>
+                    <motion.li
+                      key={idx}
+                      initial={{ x: -10, opacity: 0 }}
+                      whileInView={{ x: 0, opacity: 1 }}
+                      transition={{ delay: idx * 0.1, duration: 0.3 }}
+                    >
+                      {pt}
+                    </motion.li>
                   ))}
                 </ul>
               </CardContent>
@@ -509,22 +556,62 @@ const Experience: React.FC = () => (
 const Education: React.FC = () => (
   <Container>
     <section id="education" className="py-20">
-      <SectionTitle icon={<Brain className="h-6 w-6 text-cyan-500" />}>Education</SectionTitle>
-      <div className="grid gap-8">
-        {DATA.education.map((ed) => (
+      <SectionTitle icon={<Brain className="h-6 w-6 text-cyan-500" />}>
+        Education
+      </SectionTitle>
+
+      <div className="relative ml-6">
+        {/* Animated glowing vertical line */}
+        <motion.div
+          initial={{ height: 0 }}
+          whileInView={{ height: "100%" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute left-[-1px] top-0 w-[3px] 
+                     bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-500
+                     rounded-full animate-pulse"
+        />
+
+        {DATA.education.map((ed, idx) => (
           <motion.div
             key={ed.school}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
+            className="relative mb-12 pl-6"
           >
-            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl">
+            {/* Glowing timeline dot */}
+            <motion.div
+              animate={{
+                scale: [1, 1.3, 1], boxShadow: [
+                  "0 0 0px #22d3ee",
+                  "0 0 20px #22d3ee",
+                  "0 0 0px #22d3ee"
+                ]
+              }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="absolute -left-[25px] top-6 w-5 h-5 rounded-full bg-cyan-500"
+            />
+
+            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 
+                             dark:from-slate-800 dark:to-slate-900 
+                             border border-slate-200 dark:border-slate-700 shadow-xl">
               <CardHeader>
-                <CardTitle>{ed.degree}</CardTitle>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{ed.school}</p>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{ed.period}</p>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{ed.percentage}</p>
+                <CardTitle className="text-lg font-bold">{ed.degree}</CardTitle>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {ed.school}
+                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {ed.period}
+                </p>
+                <motion.p
+                  initial={{ x: -10, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.3 }}
+                  className="text-sm text-slate-600 dark:text-slate-400"
+                >
+                  {ed.percentage}
+                </motion.p>
               </CardHeader>
             </Card>
           </motion.div>
@@ -591,8 +678,22 @@ const Contact: React.FC = () => {
 
 // ============================= Page =============================
 export default function Page() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000); // show loader for 3s
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;  // ✅ show loader first
+  }
+
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50" id="top">
+    <div
+      className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50"
+      id="top"
+    >
       <Nav />
       <Hero />
       <Skills />
