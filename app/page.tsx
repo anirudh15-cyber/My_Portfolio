@@ -4,7 +4,7 @@ import { ProjectCard } from "@/components/ui/project-card";
 import Logo from "@/components/ui/Logo";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import {
   Github,
@@ -191,12 +191,20 @@ const SectionTitle: React.FC<{ icon?: React.ReactNode; children: React.ReactNode
     viewport={{ once: true }}
     className="flex items-center gap-3 mb-8"
   >
-    {icon}
+    {icon && (
+      <motion.div
+        animate={{ y: [0, -6, 0] }} // bounce effect
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      >
+        {icon}
+      </motion.div>
+    )}
     <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
       {children}
     </h2>
   </motion.section>
 );
+
 
 // ============================= Sections =============================
 const Nav: React.FC = () => {
@@ -221,10 +229,14 @@ const Nav: React.FC = () => {
               Anirudh Narang —
               <TypeAnimation
                 sequence={[
-                  "AI/ML Engineer 🚀", 2000,
-                  "Computer Vision 👁️", 2000,
-                  "NLP & Time-Series 📊", 2000,
-                  "Building Scalable AI ⚡", 2000,
+                  "AI/ML Engineer 🚀",
+                2000,
+                "Computer Vision Specialist 👁️",
+                2000,
+                "Data Scientist📊",
+                2000,
+                "Building Scalable AI ⚡",
+                2000,
                 ]}
                 wrapper="span"
                 speed={50}
@@ -295,115 +307,141 @@ const Nav: React.FC = () => {
 };
 
 
-const Hero: React.FC = () => (
-  <div id="about" className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-900 text-white overflow-hidden">
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.1 }}
-      className="pointer-events-none absolute inset-0"
-      style={{
-        backgroundImage:
-          "radial-gradient(600px 200px at 20% 20%, rgba(34,211,238,0.18), transparent), radial-gradient(500px 180px at 80% 30%, rgba(59,130,246,0.18), transparent)",
-      }}
-    />
-    <Container>
-      <div className="relative grid md:grid-cols-2 gap-12 items-center py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            {DATA.name}
-          </h1>
-          <TypeAnimation
-            sequence={[
-              "AI/ML Engineer 🚀",
-              2000,
-              "Computer Vision Specialist 👁️",
-              2000,
-              "Data Scientist📊",
-              2000,
-              "Building Scalable AI ⚡",
-              2000,
-            ]}
-            wrapper="span"
-            speed={50}
-            repeat={Infinity}
-            className="block text-xl mt-4 text-slate-200"
-          />
-          <p className="mt-6 text-slate-300 max-w-xl">{DATA.summary}</p>
-          <div className="flex flex-wrap items-center gap-4 mt-6">
-            <Badge className="flex items-center gap-1 bg-slate-800 text-slate-200">
-              <MapPin className="h-3.5 w-3.5" /> {DATA.location}
-            </Badge>
-            <a href={`tel:${DATA.phone}`} className="flex items-center gap-2 text-sm hover:underline">
-              <Phone className="h-4 w-4" />
-              {DATA.phone}
-            </a>
-            <a href={`mailto:${DATA.email}`} className="flex items-center gap-2 text-sm hover:underline">
-              <Mail className="h-4 w-4" />
-              {DATA.email}
-            </a>
-          </div>
-          <motion.div className="flex items-center gap-3 mt-8">
-            {DATA.socials.map((s) => (
-              <Button key={s.label} className="rounded-full border-slate-600 text-white/90 hover:text-white">
-                <a href={s.href} target="_blank" rel="noreferrer" className="flex items-center">
-                  {React.createElement(s.icon, { className: "h-4 w-4 mr-2" })}
-                  {s.label}
-                </a>
-              </Button>
-            ))}
+const Hero: React.FC = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, 100]); // parallax shift
+
+  return (
+    <div
+      id="about"
+      className="relative overflow-hidden text-white min-h-screen flex items-center"
+    >
+      {/* 🌌 Animated Gradient Background */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 30%, rgba(6,182,212,0.25), transparent 70%), radial-gradient(circle at 80% 70%, rgba(59,130,246,0.25), transparent 70%)",
+            "radial-gradient(circle at 30% 40%, rgba(147,51,234,0.25), transparent 70%), radial-gradient(circle at 70% 60%, rgba(6,182,212,0.25), transparent 70%)",
+          ],
+        }}
+        transition={{ duration: 12, repeat: Infinity, repeatType: "mirror" }}
+      />
+
+      {/* 🌠 Floating Particles Layer */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ backgroundImage: "url('/particles.png')" }}
+        animate={{ backgroundPosition: ["0px 0px", "100px 100px"] }}
+        transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+      />
+
+      <Container>
+        <div className="relative grid md:grid-cols-2 gap-12 items-center py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              {DATA.name}
+            </h1>
+            <TypeAnimation
+              sequence={[
+                "AI/ML Engineer 🚀",
+                2000,
+                "Computer Vision Specialist 👁️",
+                2000,
+                "Data Scientist📊",
+                2000,
+                "Building Scalable AI ⚡",
+                2000,
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className="block text-xl mt-4 text-slate-200"
+            />
+            <p className="mt-6 text-slate-300 max-w-xl">{DATA.summary}</p>
+            <div className="flex flex-wrap items-center gap-4 mt-6">
+              <Badge className="flex items-center gap-1 bg-slate-800 text-slate-200">
+                <MapPin className="h-3.5 w-3.5" /> {DATA.location}
+              </Badge>
+              <a href={`tel:${DATA.phone}`} className="flex items-center gap-2 text-sm hover:underline">
+                <Phone className="h-4 w-4" />
+                {DATA.phone}
+              </a>
+              <a href={`mailto:${DATA.email}`} className="flex items-center gap-2 text-sm hover:underline">
+                <Mail className="h-4 w-4" />
+                {DATA.email}
+              </a>
+            </div>
+            <motion.div className="flex items-center gap-3 mt-8">
+              {DATA.socials.map((s) => (
+                <Button key={s.label} className="rounded-full border-slate-600 text-white/90 hover:text-white">
+                  <a href={s.href} target="_blank" rel="noreferrer" className="flex items-center">
+                    {React.createElement(s.icon, { className: "h-4 w-4 mr-2" })}
+                    {s.label}
+                  </a>
+                </Button>
+              ))}
+            </motion.div>
           </motion.div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-          className="flex justify-center relative mt-10 md:mt-0"
-        >
-          {/* Glowing Halo */}
-          <div className="absolute inset-0 flex justify-center items-center">
-            <div className="w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 blur-3xl opacity-30 animate-pulse"></div>
-          </div>
-          {/* Headshot */}
-          <img
-            src="/GIF.gif"
-            alt="Anirudh Narang"
-            className="rounded-2xl shadow-lg border border-slate-700/40 
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+            className="flex justify-center relative mt-10 md:mt-0"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
+              className="flex justify-center relative mt-10 md:mt-0"
+              style={{ y }} // ✅ parallax shift
+            ></motion.div>
+            {/* Glowing Halo */}
+            <div className="absolute inset-0 flex justify-center items-center">
+              <div className="w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 blur-3xl opacity-30 animate-pulse"></div>
+            </div>
+            {/* Headshot */}
+            <img
+              src="/GIF.gif"
+              alt="Anirudh Narang"
+              className="rounded-2xl shadow-lg border border-slate-700/40 
              w-full max-w-sm md:max-w-md lg:max-w-lg 
              object-cover"
-          />
+            />
 
 
-          {/* Floating Icon 1 */}
-          <motion.div
-            animate={{ y: [0, -10, 0], scale: [1, 1.1, 1] }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
-          >
-            <Code2 className="h-8 w-8 text-cyan-500" />
+            {/* Floating Icon 1 */}
+            <motion.div
+              animate={{ y: [0, -10, 0], scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
+            >
+              <Code2 className="h-8 w-8 text-cyan-500" />
+            </motion.div>
+
+            {/* Floating Icon 2 */}
+            <motion.div
+              animate={{ x: [0, 10, 0], scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute bottom-6 -left-6 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
+            >
+              <Brain className="h-8 w-8 text-blue-500" />
+            </motion.div>
+
           </motion.div>
 
-          {/* Floating Icon 2 */}
-          <motion.div
-            animate={{ x: [0, 10, 0], scale: [1, 1.1, 1] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute bottom-6 -left-6 bg-white dark:bg-slate-800 p-2 rounded-full shadow-md"
-          >
-            <Brain className="h-8 w-8 text-blue-500" />
-          </motion.div>
-
-        </motion.div>
-
-      </div>
-    </Container>
-  </div>
-);
+        </div>
+      </Container>
+    </div>
+  );
+};
 
 const Skills: React.FC = () => (
   <Container>
@@ -421,12 +459,18 @@ const Skills: React.FC = () => (
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Badge className="bg-slate-200 dark:bg-slate-800 dark:text-slate-200 
-                      hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 
-                      hover:text-white shadow-md cursor-pointer transition-all cursor-pointer">
+                  <Badge
+                    className={cn(
+                      "relative px-3 py-1 rounded-md text-xs font-medium text-white cursor-pointer",
+                      "bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500",
+                      "bg-[length:200%_200%] animate-shimmer", // shimmer effect
+                      "hover:from-cyan-400 hover:via-blue-600 hover:to-purple-600 shadow-md"
+                    )}
+                  >
                     {s}
                   </Badge>
                 </motion.div>
+
               ))}
 
             </div>
@@ -439,51 +483,82 @@ const Skills: React.FC = () => (
 
 const Projects: React.FC = () => (
   <Container>
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-24 relative">
+      {/* 🌌 Animated Background */}
+      <motion.div
+        className="absolute inset-0 -z-10"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 40%, rgba(6,182,212,0.15), transparent 70%), radial-gradient(circle at 80% 60%, rgba(59,130,246,0.15), transparent 70%)",
+            "radial-gradient(circle at 30% 30%, rgba(147,51,234,0.15), transparent 70%), radial-gradient(circle at 70% 70%, rgba(6,182,212,0.15), transparent 70%)",
+          ],
+        }}
+        transition={{ duration: 15, repeat: Infinity, repeatType: "mirror" }}
+      />
+
       <SectionTitle icon={<Database className="h-6 w-6 text-cyan-500" />}>
         Projects
       </SectionTitle>
 
-      {/* Auto rows + stretch makes all cards same height */}
-      <div className="grid md:grid-cols-3 gap-8 items-stretch auto-rows-fr">
-        {DATA.projects.map((p, idx) => (
+      <motion.div
+        className="grid md:grid-cols-3 gap-8 items-stretch auto-rows-fr"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0, y: 40 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { staggerChildren: 0.15, duration: 0.6 },
+          },
+        }}
+      >
+        {DATA.projects.map((p) => (
           <motion.div
             key={p.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: idx * 0.05, type: "spring", stiffness: 200 }}
-            whileHover={{ scale: 1.03, rotateZ: 1 }}
-            whileTap={{ scale: 0.98 }}
-            className="h-full"
+            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+            whileHover={{ scale: 1.05, rotateZ: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="group relative rounded-2xl overflow-hidden"
           >
-            <ProjectCard className="flex flex-col justify-between h-[400px] w-full transition-shadow duration-300 hover:shadow-2xl hover:shadow-cyan-500/20"
+            {/* 🌈 Gradient Glow Overlay */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-2xl"></div>
+
+            {/* Glassmorphism Project Card */}
+            <ProjectCard
+              className="relative flex flex-col h-full
+                         rounded-2xl border border-white/20 
+                         bg-white/10 dark:bg-slate-900/20 
+                         backdrop-blur-md shadow-xl
+                         hover:shadow-[0_0_25px_rgba(6,182,212,0.5)]
+                         transition-all duration-500"
             >
-              {/* Header */}
               <CardHeader className="pb-0">
-                <CardTitle className="text-lg font-bold mb-2">{p.title}</CardTitle>
+                <CardTitle className="text-lg font-bold">{p.title}</CardTitle>
               </CardHeader>
 
-              {/* Content */}
               <CardContent className="flex flex-col flex-1 pt-0">
                 <p className="text-sm mb-6 text-slate-600 dark:text-slate-300 leading-relaxed">
                   {p.blurb}
                 </p>
 
-                {/* Tech stack tags */}
+                {/* 🛠 Tech stack */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {p.stack.map((s: string) => (
                     <Badge
                       key={s}
-                      className="bg-slate-200 dark:bg-slate-800 dark:text-slate-200 hover:scale-110 hover:bg-cyan-500 hover:text-white transition-all cursor-pointer"
+                      className="bg-slate-200/60 dark:bg-slate-800/60 dark:text-slate-200 
+                                 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 
+                                 hover:text-white transition-all cursor-pointer"
                     >
                       {s}
                     </Badge>
                   ))}
                 </div>
 
-                {/* Video preview with GitHub button pinned */}
-                <div className="mt-auto aspect-video rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative">
+                {/* 🎥 Video preview */}
+                <div className="mt-auto aspect-video rounded-xl overflow-hidden relative border border-white/20">
                   <video
                     src={p.video}
                     autoPlay
@@ -491,16 +566,15 @@ const Projects: React.FC = () => (
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
                   />
-                  {p.links?.map((l: { label: string; href: string }) => (
+                  {p.links?.map((l) => (
                     <a
                       key={l.label}
                       href={l.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="absolute bottom-3 right-3 p-2 rounded-full bg-cyan-600 hover:bg-cyan-700 
-                                 text-white shadow-md opacity-80 hover:opacity-100 transition"
+                      className="absolute bottom-3 right-3 p-2 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white shadow-md transition"
                     >
                       <Github className="h-4 w-4" />
                     </a>
@@ -510,11 +584,10 @@ const Projects: React.FC = () => (
             </ProjectCard>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   </Container>
 );
-
 
 
 const Experience: React.FC = () => (
@@ -557,9 +630,11 @@ const Experience: React.FC = () => (
               className="absolute -left-[25px] top-6 w-5 h-5 rounded-full bg-cyan-500"
             />
 
-            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 
-                             dark:from-slate-800 dark:to-slate-900 
-                             border border-slate-200 dark:border-slate-700 shadow-xl">
+            <Card className="bg-white/10 dark:bg-slate-900/20 
+             backdrop-blur-md border border-white/20 
+             rounded-2xl shadow-xl transition 
+             hover:shadow-cyan-500/20 hover:scale-[1.02] 
+             duration-300">
               <CardHeader>
                 <CardTitle className="text-lg font-bold">
                   {e.role} — {e.company}
@@ -630,9 +705,11 @@ const Education: React.FC = () => (
               className="absolute -left-[25px] top-6 w-5 h-5 rounded-full bg-cyan-500"
             />
 
-            <Card className="bg-gradient-to-br from-slate-100 to-slate-50 
-                             dark:from-slate-800 dark:to-slate-900 
-                             border border-slate-200 dark:border-slate-700 shadow-xl">
+            <Card className="bg-white/10 dark:bg-slate-900/20 
+             backdrop-blur-md border border-white/20 
+             rounded-2xl shadow-xl transition 
+             hover:shadow-cyan-500/20 hover:scale-[1.02] 
+             duration-300">
               <CardHeader>
                 <CardTitle className="text-lg font-bold">{ed.degree}</CardTitle>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -695,7 +772,11 @@ const Contact: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-8">
+          <Card className="bg-white/10 dark:bg-slate-900/20 
+             backdrop-blur-md border border-white/20 
+             rounded-2xl shadow-xl transition 
+             hover:shadow-cyan-500/20 hover:scale-[1.02] 
+             duration-300">
             <form ref={formRef} onSubmit={sendEmail} className="grid gap-4">
               <Input type="text" name="from_name" placeholder="Your Name" required />
               <Input type="email" name="reply_to" placeholder="Your Email" required />

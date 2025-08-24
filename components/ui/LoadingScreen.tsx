@@ -19,8 +19,8 @@ const LoadingScreen: React.FC = () => {
           className="fixed inset-0 flex flex-col items-center justify-center
                      bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 
                      text-white z-[9999]"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 1 , scale:1}}
+          exit={{ opacity: 0, scale: 0.2, filter: "blur(8px)" }} 
           transition={{ duration: 1 }}
         >
           {/* Animated Logo */}
