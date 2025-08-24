@@ -27,7 +27,7 @@ const LoadingScreen: React.FC = () => {
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 220 110"
-            className="w-40 h-40"
+            className="w-2/3 max-w-xs h-auto"
           >
             {/* A Shape */}
             <motion.path

@@ -213,7 +213,7 @@ const Nav: React.FC = () => {
         <div className="flex items-center justify-between py-4">
           {/* Logo + Animated Title */}
           <a href="#top" className="flex items-center gap-1">
-            <Logo size={40} glow={false} /> {/* ✅ small, clean logo here */}
+            <Logo size={40}/> {/* ✅ small, clean logo here */}
             <span className="font-bold text-lg flex items-center gap-2">
               Anirudh Narang —
               <TypeAnimation
