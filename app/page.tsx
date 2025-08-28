@@ -77,7 +77,7 @@ function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
 const DATA = {
   name: "Anirudh Narang",
   role: "AI/ML Engineer | Delivering Scalable Solutions in Computer Vision, NLP & Time-Series",
-  summary: "I’m an AI/ML Engineer passionate about building end-to-end machine learning products — from research to deployment. My work spans computer vision, NLP, and time-series modeling, with a focus on real-time systems and scalable data pipelines. Skilled in PyTorch, TensorFlow, FastAPI, and OpenCV, I thrive at turning ideas into production-ready AI applications that make a measurable impact.",
+  summary: "I’m an AI/ML Engineer & Data Scientist passionate about transforming raw data into scalable AI solutions. My expertise spans computer vision, NLP, and predictive analytics, where I’ve built and deployed models that power real-time systems in finance, automation, and human–computer interaction. Beyond just building models, I focus on end-to-end pipelines, deployment (MLOps), and business impact — ensuring AI solutions actually create value.",
   location: "Delhi, India",
   email: "anirudhnarang16@gmail.com",
   phone: "+91-9818924498",
@@ -144,6 +144,8 @@ const DATA = {
         "Designed and deployed ML models on large-scale financial datasets, improving accuracy by 15% while reducing processing time by 20%.",
         "Enhanced predictive analytics pipelines with deep learning architectures, leading to a 10% improvement in decision-making quality.",
         "Collaborated across business teams to integrate AI insights into dashboards, driving adoption of data-driven decision making.",
+        "Conducted knowledge transfer (KT) sessions and created technical documentation to upskill team members on ML workflows and deployment practices.",
+        "Achieved recognition through the Gold Star Award (2025) for delivering high impact solutions that directly improved business efficiency.",
       ],
     },
   ],
