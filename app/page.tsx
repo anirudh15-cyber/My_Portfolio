@@ -77,7 +77,7 @@ function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
 const DATA = {
   name: "Anirudh Narang",
   role: "AI/ML Engineer | Delivering Scalable Solutions in Computer Vision, NLP & Time-Series",
-  summary: "I’m an AI/ML Engineer & Data Scientist passionate about transforming raw data into scalable AI solutions. My expertise spans computer vision, NLP, and predictive analytics, where I’ve built and deployed models that power real-time systems in finance, automation, and human–computer interaction. Beyond just building models, I focus on end-to-end pipelines, deployment (MLOps), and business impact — ensuring AI solutions actually create value.",
+  summary: "Hi, I’m Anirudh 👋 — a Data Scientist & AI Engineer with a passion for exploring the boundaries of AI. Whether it’s deep learning, NLP, or time-series forecasting, I enjoy experimenting, learning, and pushing ideas from notebooks into production-ready systems.",
   location: "Delhi, India",
   email: "anirudhnarang16@gmail.com",
   phone: "+91-9818924498",
@@ -114,7 +114,7 @@ const DATA = {
     {
       title: "Emotion Detection System",
       blurb:
-        "Built a real-time facial emotion recognition pipeline using YOLOv8 and CNNs; optimized for live video inference in HCI and analytics use cases.",
+        "Built a real-time emotion recognition pipeline using YOLOv8 and CNNs (92% accuracy) — optimized for live video inference, enabling smarter human–computer interaction and behavioral analytics.",
       stack: ["YOLOv8", "PyTorch", "OpenCV", "FastAPI"],
       video: "/videos/EDS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Emotion_detection-using-YOLOv8" }],
@@ -122,14 +122,14 @@ const DATA = {
     {
       title: "Custom Hand Gesture Recognition",
       blurb:
-        "Developed an LSTM-based gesture classifier (95% accuracy) on MediaPipe landmarks for low-latency system control.",
+        "Developed a gesture-controlled system (95% accuracy) with LSTM + MediaPipe landmarks, enabling touchless interaction for automation and accessibility use cases.",
       stack: ["TensorFlow", "LSTM", "MediaPipe", "Pose Estimation"],
       video: "/videos/HGRS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Custom-Hand-Gesture-Recognition-System" }],
     },
     {
       title: "Social Distancing Violation Detection System",
-      blurb: "Implemented a YOLO-based monitoring system to flag distancing violations in public spaces; enabled smarter crowd management.",
+      blurb: "Implemented a YOLO-based monitoring system that flags distancing violations in real time, supporting crowd safety and smart surveillance in public spaces.",
       stack: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning"],
       video: "/videos/SDS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Social-Distancing-Violation-Detection-System" }],
