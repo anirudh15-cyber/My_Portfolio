@@ -134,20 +134,39 @@ const DATA = {
       video: "/videos/SDS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Social-Distancing-Violation-Detection-System" }],
     },
+    {
+      title: "Traffic Analytics System (YOLO + BoT-SORT + OpenCV)",
+      blurb: "Traffic Analytics System that detects, tracks, and counts vehicles in traffic videos. It extends YOLO-based object detection with multi-object tracking and a custom lane marker tool for zone-wise vehicle analysis.",
+      stack: ["YOLO", "OpenCV", "BoT-SORT", "Deep Learning"],
+      video: "/videos/traffic_out.mp4",
+      links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Traffic_count" }],
+    },
   ],
   experience: [
+        {
+      company: "Tata Consultancy Services",
+      role: "System Engineer",
+      period: "11/2025 — Present",
+      points: [
+        "Continuing ownership of AI/ML solutions for an enterprise client previously handled at Accenture.",
+        "Ensured seamless knowledge transition, delivery continuity, and production stability.",
+        "Enhancing existing ML pipelines and analytics workflows in collaboration with stakeholders.",
+      ],
+    },
     {
       company: "Accenture",
       role: "Associate Software Engineer",
-      period: "09/2023 — Present",
+      period: "09/2023 — 11/2025",
       points: [
-        "Developed and optimized policies & claims management systems using SAP ABAP, ensuring scalability and performance improvements.",
-        "Automated recurring processes by writing modular ABAP code, reducing manual efforts by 20%.",
-        "Collaborated with cross-functional teams for requirement gathering, debugging, and deployment of client-specific solutions.",
-        "Conducted knowledge transfer (KT) sessions and created technical documentation to upskill team members on automation workflows and deployment practices.",
-        "Achieved recognition through the Gold Star Award (2025) for delivering high impact solutions that directly improved business efficiency.",
+        "Built and deployed ML models on financial and policy datasets, improving prediction accuracy by 15%.",
+        "Automated claims processing workflows, reducing turnaround time by 20%.",
+        "Performed feature engineering on structured and unstructured data (transactions, policy documents).",
+        "Integrated ML insights into dashboards, increasing analytics adoption across business teams.",
+        "Conducted KT sessions and documented end-to-end ML workflows.",
+        "Gold Star Award (2025) for high-impact automation in policy management.",
       ],
     },
+
   ],
   education: [
     {
