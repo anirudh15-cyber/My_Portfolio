@@ -138,7 +138,7 @@ const DATA = {
       title: "Traffic Analytics System (YOLO + BoT-SORT + OpenCV)",
       blurb: "Traffic Analytics System that detects, tracks, and counts vehicles in traffic videos. It extends YOLO-based object detection with multi-object tracking and a custom lane marker tool for zone-wise vehicle analysis.",
       stack: ["YOLO", "OpenCV", "BoT-SORT", "Deep Learning"],
-      video: "/videos/traffic_out.mp4",
+      video: "/videos/TAS.mp4",
       links: [{ label: "GitHub", href: "https://github.com/anirudh15-cyber/Traffic_count" }],
     },
   ],
